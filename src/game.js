@@ -98,7 +98,8 @@ const ctx = canvas.getContext('2d')
 
 function gameRenderer (game) {
   ctx.fillStyle = 'white'
-  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+  //ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+  ctx.fillArc(0, 0, window.innerWidth, window.innerHeight)
 
   for (let playerId in game.players) {
     const { color, x, y } = game.players[playerId]

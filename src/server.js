@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
 
 app.use(express.static('public'))
 
-const ACCEL = 1 / 500
+const ACCEL = 1 / 750
 
 class GameServer {
   constructor () {

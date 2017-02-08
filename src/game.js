@@ -108,7 +108,7 @@ function gameRenderer (game) {
     ctx.fillArc(x,y,50,0,2*Math.PI);
     if (playerId === myPlayerId) {
       //ctx.strokeRect(x, y, 50, 50)
-      ctx.fillArc(x,y,50,0,2*Math.PI)
+      ctx.strokeArc(x,y,50,0,2*Math.PI)
     }
   }
 }

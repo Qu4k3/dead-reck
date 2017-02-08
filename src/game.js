@@ -103,9 +103,11 @@ function gameRenderer (game) {
   for (let playerId in game.players) {
     const { color, x, y } = game.players[playerId]
     ctx.fillStyle = color
-    ctx.fillRect(x, y, 50, 50)
+    //ctx.fillRect(x, y, 50, 50)
+    ctx.fillArc(x,y,50,0,2*Math.PI);
     if (playerId === myPlayerId) {
-      ctx.strokeRect(x, y, 50, 50)
+      //ctx.strokeRect(x, y, 50, 50)
+      ctx.fillArc(x,y,50,0,2*Math.PI)
     }
   }
 }

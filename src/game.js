@@ -82,10 +82,13 @@ function updateInputs () {
   if (!deepEqual(myInputs, oldInputs)) {
     socket.emit('move', myInputs)
 
-    // update our local player' inputs so that we see instant change
-    // (inputs get taken into account in logic simulation)
-    const myPlayer = game.players[myPlayerId]
-    myPlayer.inputs = Object.assign({}, myInputs)
+    // update our local player' inputs aproximately when the server
+    // takes them into account
+    const frozenInputs = Object.assign({}, myInputs)
+    setTimeout(function () {
+      const myPlayer = game.players[myPlayerId]
+      myPlayer.inputs = frozenInputs
+    }, ping)
   }
 }
 
@@ -98,18 +101,14 @@ const ctx = canvas.getContext('2d')
 
 function gameRenderer (game) {
   ctx.fillStyle = 'white'
-  //ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
-  ctx.fillArc(0, 0, window.innerWidth, window.innerHeight)
+  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight)
 
   for (let playerId in game.players) {
     const { color, x, y } = game.players[playerId]
     ctx.fillStyle = color
-    //ctx.fillRect(x, y, 50, 50)
-    ctx.fillArc(x,y,50,0,2*Math.PI);
+    ctx.fillRect(x, y, 50, 50)
     if (playerId === myPlayerId) {
-      //ctx.strokeRect(x, y, 50, 50)
-      ctx.arc(x,y,50,0,2*Math.PI);
-      ctx.stroke();
+      ctx.strokeRect(x, y, 50, 50)
     }
   }
 }
